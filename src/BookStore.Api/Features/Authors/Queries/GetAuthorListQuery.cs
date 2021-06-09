@@ -8,6 +8,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
+using BookStore.ApplicationCore.Interfaces;
 
 namespace BookStore.Api.Features.Authors.Queries
 {
@@ -15,18 +16,18 @@ namespace BookStore.Api.Features.Authors.Queries
     {
         public class GetListQueryHandler : IRequestHandler<GetAuthorListQuery, List<AuthorDto>>
         {
-            private readonly EfContext _context;
+            private readonly IRepository<Author> _repository;
             private readonly IMapper _mapper;
 
-            public GetListQueryHandler(EfContext context, IMapper mapper)
+            public GetListQueryHandler(IRepository<Author> repository, IMapper mapper)
             {
-                _context = context;
+                _repository = repository;
                 _mapper = mapper;
             }
 
             public async Task<List<AuthorDto>> Handle(GetAuthorListQuery request, CancellationToken cancellationToken)
             {
-                List<Author> list = await _context.Author.ToListAsync();
+                List<Author> list = await _repository.Query().ToListAsync();
                 List<AuthorDto> listDto = _mapper.Map<List<Author>, List<AuthorDto>>(list);
                 return listDto;
             }

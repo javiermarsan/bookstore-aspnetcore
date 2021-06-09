@@ -8,6 +8,7 @@ using System.Threading.Tasks;
 using BookStore.ApplicationCore.Entities;
 using BookStore.Infrastructure.Data;
 using Microsoft.EntityFrameworkCore;
+using BookStore.ApplicationCore.Interfaces;
 
 namespace BookStore.Api.Features.Authors.Queries
 {
@@ -17,18 +18,18 @@ namespace BookStore.Api.Features.Authors.Queries
 
         public class GetDetailQueryHandler : IRequestHandler<GetAuthorDetailQuery, AuthorDto>
         {
-            private readonly EfContext _context;
+            private readonly IRepository<Author> _repository;
             private readonly IMapper _mapper;
 
-            public GetDetailQueryHandler(EfContext context, IMapper mapper)
+            public GetDetailQueryHandler(IRepository<Author> repository, IMapper mapper)
             {
-                _context = context;
+                _repository = repository;
                 _mapper = mapper;
             }
 
             public async Task<AuthorDto> Handle(GetAuthorDetailQuery request, CancellationToken cancellationToken)
             {
-                var entity = await _context.Author.Where(x => x.AuthorId == request.AuthorId).FirstOrDefaultAsync();
+                var entity = await _repository.Query().Where(x => x.AuthorId == request.AuthorId).FirstOrDefaultAsync();
                 if (entity == null)
                     throw new Exception("Author not found");
 

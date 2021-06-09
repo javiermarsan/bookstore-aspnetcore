@@ -7,6 +7,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using BookStore.ApplicationCore.Entities;
 using BookStore.Infrastructure.Data;
+using BookStore.ApplicationCore.Interfaces;
 
 namespace BookStore.Api.Features.Authors.Commands
 {
@@ -25,11 +26,11 @@ namespace BookStore.Api.Features.Authors.Commands
 
         public class CreateCommandHandler : IRequestHandler<CreateAuthorCommand, Guid>
         {
-            private readonly EfContext _context;
+            private readonly IRepository<Author> _repository;
 
-            public CreateCommandHandler(EfContext context)
+            public CreateCommandHandler(IRepository<Author> repository)
             {
-                _context = context;
+                _repository = repository;
             }
 
             public async Task<Guid> Handle(CreateAuthorCommand request, CancellationToken cancellationToken)
@@ -39,9 +40,9 @@ namespace BookStore.Api.Features.Authors.Commands
                     Name = request.Name
                 };
 
-                _context.Author.Add(entity);
+                _repository.Add(entity);
 
-                int value = await _context.SaveChangesAsync();
+                int value = await _repository.SaveAsync();
                 if (value > 0)
                     return entity.AuthorId;
 

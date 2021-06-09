@@ -8,6 +8,7 @@ using MediatR;
 using BookStore.ApplicationCore.Entities;
 using BookStore.Infrastructure.Data;
 using Microsoft.EntityFrameworkCore;
+using BookStore.ApplicationCore.Interfaces;
 
 namespace BookStore.Api.Features.Authors.Commands
 {
@@ -28,22 +29,23 @@ namespace BookStore.Api.Features.Authors.Commands
 
         public class UpdateCommandHandler : IRequestHandler<UpdateAuthorCommand, bool>
         {
-            private readonly EfContext _context;
+            private readonly IRepository<Author> _repository;
 
-            public UpdateCommandHandler(EfContext context)
+            public UpdateCommandHandler(IRepository<Author> repository)
             {
-                _context = context;
+                _repository = repository;
             }
 
             public async Task<bool> Handle(UpdateAuthorCommand request, CancellationToken cancellationToken)
             {
-                Author entity = await _context.Author.Where(a => a.AuthorId == request.AuthorId).FirstOrDefaultAsync();
+                Author entity = await _repository.QueryContext().Where(a => a.AuthorId == request.AuthorId).FirstOrDefaultAsync();
                 if (entity == null)
                     return false;
 
                 entity.Name = request.Name;
+                _repository.Update(entity);
 
-                await _context.SaveChangesAsync();
+                await _repository.SaveAsync();
                 
                 return true;
             }
