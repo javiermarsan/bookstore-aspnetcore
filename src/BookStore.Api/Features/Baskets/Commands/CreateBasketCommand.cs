@@ -7,7 +7,7 @@ using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace BookStore.Api.Features.Basket.Commands
+namespace BookStore.Api.Features.Baskets.Commands
 {
     public class CreateBasketCommand : IRequest<Guid>
     {
@@ -28,7 +28,7 @@ namespace BookStore.Api.Features.Basket.Commands
 
             public async Task<Guid> Handle(CreateBasketCommand request, CancellationToken cancellationToken)
             {
-                ApplicationCore.Entities.Basket entity = new ApplicationCore.Entities.Basket
+                Basket entity = new Basket
                 {
                     CreationDate = request.CreationDate
                 };

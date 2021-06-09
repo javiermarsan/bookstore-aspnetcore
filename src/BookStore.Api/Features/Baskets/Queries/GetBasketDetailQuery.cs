@@ -8,7 +8,7 @@ using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace BookStore.Api.Features.Basket.Queries
+namespace BookStore.Api.Features.Baskets.Queries
 {
     public class GetBasketDetailQuery : IRequest<BasketDto>
     {

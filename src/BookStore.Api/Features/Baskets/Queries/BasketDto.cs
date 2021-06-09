@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace BookStore.Api.Features.Basket.Queries
+namespace BookStore.Api.Features.Baskets.Queries
 {
     public class BasketDto
     {
