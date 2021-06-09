@@ -15,6 +15,8 @@ namespace BookStore.Infrastructure.Data
 
         public virtual DbSet<AuthorEntity> Author { get; set; }
         public virtual DbSet<BookEntity> Book { get; set; }
+        public virtual DbSet<BasketEntity> Basket { get; set; }
+        public virtual DbSet<BasketItemEntity> BasketItem { get; set; }
 
     }
 }
