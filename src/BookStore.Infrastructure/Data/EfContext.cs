@@ -14,6 +14,7 @@ namespace BookStore.Infrastructure.Data
         public EfContext(DbContextOptions<EfContext> options) : base(options) { }
 
         public virtual DbSet<AuthorEntity> Author { get; set; }
+        public virtual DbSet<BookEntity> Book { get; set; }
 
     }
 }
