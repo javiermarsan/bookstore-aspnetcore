@@ -42,7 +42,7 @@ namespace BookStore.Api.Features.Books.Commands
 
             public async Task<bool> Handle(UpdateBookCommand request, CancellationToken cancellationToken)
             {
-                BookEntity entity = await _context.Book.Where(a => a.BookId == request.BookId).FirstOrDefaultAsync();
+                Book entity = await _context.Book.Where(a => a.BookId == request.BookId).FirstOrDefaultAsync();
                 if (entity == null)
                     return false;
 

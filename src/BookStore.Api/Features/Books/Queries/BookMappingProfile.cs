@@ -11,7 +11,7 @@ namespace BookStore.Api.Features.Books.Queries
     {
         public BookMappingProfile()
         {
-            CreateMap<BookEntity, BookDto>();
+            CreateMap<Book, BookDto>();
         }
     }
 }

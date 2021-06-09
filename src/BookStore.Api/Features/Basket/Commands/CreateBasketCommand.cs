@@ -28,7 +28,7 @@ namespace BookStore.Api.Features.Basket.Commands
 
             public async Task<Guid> Handle(CreateBasketCommand request, CancellationToken cancellationToken)
             {
-                BasketEntity entity = new BasketEntity
+                ApplicationCore.Entities.Basket entity = new ApplicationCore.Entities.Basket
                 {
                     CreationDate = request.CreationDate
                 };

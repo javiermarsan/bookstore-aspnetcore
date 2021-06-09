@@ -10,9 +10,9 @@ namespace BookStore.ApplicationCore.Services
 {
     public class BasketService : IBasketService
     {
-        private readonly IRepository<BasketItemEntity> _basketItemRepository;
+        private readonly IRepository<BasketItem> _basketItemRepository;
 
-        public BasketService(IRepository<BasketItemEntity> basketItemRepository)
+        public BasketService(IRepository<BasketItem> basketItemRepository)
         {
             _basketItemRepository = basketItemRepository;
         }
@@ -21,7 +21,7 @@ namespace BookStore.ApplicationCore.Services
         {
             foreach (Guid productId in itemsId)
             {
-                BasketItemEntity item = new BasketItemEntity
+                BasketItem item = new BasketItem
                 {
                     CreationDate = DateTime.Now,
                     BasketId = basketId,

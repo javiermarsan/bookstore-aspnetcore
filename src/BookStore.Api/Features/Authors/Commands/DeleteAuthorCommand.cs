@@ -26,7 +26,7 @@ namespace BookStore.Api.Features.Authors.Commands
 
             public async Task<bool> Handle(DeleteAuthorCommand request, CancellationToken cancellationToken)
             {
-                AuthorEntity entity = await _context.Author.Where(a => a.AuthorId == request.AuthorId).FirstOrDefaultAsync();
+                Author entity = await _context.Author.Where(a => a.AuthorId == request.AuthorId).FirstOrDefaultAsync();
                 if (entity == null)
                     return false;
 

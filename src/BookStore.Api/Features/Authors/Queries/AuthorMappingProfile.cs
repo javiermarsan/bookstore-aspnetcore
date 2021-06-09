@@ -11,7 +11,7 @@ namespace BookStore.Api.Features.Authors.Queries
     {
         public AuthorMappingProfile()
         {
-            CreateMap<AuthorEntity, AuthorDto>();
+            CreateMap<Author, AuthorDto>();
         }
     }
 }

@@ -26,12 +26,12 @@ namespace BookStore.Api.Features.Basket.Queries
             public async Task<BasketDto> Handle(GetBasketDetailQuery request, CancellationToken cancellationToken)
             {
                 List<BasketItemDto> listDto = new List<BasketItemDto>();
-                BasketEntity entity = await _context.Basket.FirstOrDefaultAsync(x => x.BasketId == request.BasketId);
-                List<BasketItemEntity> entityItems = await _context.BasketItem.Where(x => x.BasketId == request.BasketId).ToListAsync();
+                ApplicationCore.Entities.Basket entity = await _context.Basket.FirstOrDefaultAsync(x => x.BasketId == request.BasketId);
+                List<BasketItem> entityItems = await _context.BasketItem.Where(x => x.BasketId == request.BasketId).ToListAsync();
 
-                foreach (BasketItemEntity item in entityItems)
+                foreach (BasketItem item in entityItems)
                 {
-                    BookEntity book = await _context.Book.Where(x => x.BookId == item.ProductId).FirstOrDefaultAsync();
+                    Book book = await _context.Book.Where(x => x.BookId == item.ProductId).FirstOrDefaultAsync();
                     if (book != null)
                     {
                         BasketItemDto itemDto = new BasketItemDto

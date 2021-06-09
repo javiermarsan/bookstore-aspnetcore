@@ -32,7 +32,7 @@ namespace BookStore.Api.Features.Authors.Queries
                 if (entity == null)
                     throw new Exception("Author not found");
 
-                var dto = _mapper.Map<AuthorEntity, AuthorDto>(entity);
+                var dto = _mapper.Map<Author, AuthorDto>(entity);
                 return dto;
             }
         }

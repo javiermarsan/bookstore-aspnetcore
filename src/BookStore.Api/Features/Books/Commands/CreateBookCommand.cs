@@ -38,7 +38,7 @@ namespace BookStore.Api.Features.Books.Commands
 
             public async Task<Guid> Handle(CreateBookCommand request, CancellationToken cancellationToken)
             {
-                BookEntity book = new BookEntity
+                Book book = new Book
                 {
                     Title = request.Title,
                     PublicationDate = request.PublicationDate,

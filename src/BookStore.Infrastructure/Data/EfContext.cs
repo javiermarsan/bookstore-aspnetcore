@@ -13,10 +13,10 @@ namespace BookStore.Infrastructure.Data
 
         public EfContext(DbContextOptions<EfContext> options) : base(options) { }
 
-        public virtual DbSet<AuthorEntity> Author { get; set; }
-        public virtual DbSet<BookEntity> Book { get; set; }
-        public virtual DbSet<BasketEntity> Basket { get; set; }
-        public virtual DbSet<BasketItemEntity> BasketItem { get; set; }
+        public virtual DbSet<Author> Author { get; set; }
+        public virtual DbSet<Book> Book { get; set; }
+        public virtual DbSet<Basket> Basket { get; set; }
+        public virtual DbSet<BasketItem> BasketItem { get; set; }
 
     }
 }

@@ -26,8 +26,8 @@ namespace BookStore.Api.Features.Authors.Queries
 
             public async Task<List<AuthorDto>> Handle(GetAuthorListQuery request, CancellationToken cancellationToken)
             {
-                List<AuthorEntity> list = await _context.Author.ToListAsync();
-                List<AuthorDto> listDto = _mapper.Map<List<AuthorEntity>, List<AuthorDto>>(list);
+                List<Author> list = await _context.Author.ToListAsync();
+                List<AuthorDto> listDto = _mapper.Map<List<Author>, List<AuthorDto>>(list);
                 return listDto;
             }
         }

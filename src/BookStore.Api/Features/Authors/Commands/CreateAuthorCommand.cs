@@ -34,7 +34,7 @@ namespace BookStore.Api.Features.Authors.Commands
 
             public async Task<Guid> Handle(CreateAuthorCommand request, CancellationToken cancellationToken)
             {
-                AuthorEntity entity = new AuthorEntity
+                Author entity = new Author
                 {
                     Name = request.Name
                 };

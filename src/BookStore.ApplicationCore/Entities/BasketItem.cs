@@ -7,20 +7,19 @@ using System.Threading.Tasks;
 
 namespace BookStore.ApplicationCore.Entities
 {
-    [Table("Book")]
-    public class BookEntity : BaseEntity
+    public class BasketItem : BaseEntity
     {
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-        public Guid BookId { get; set; }
+        public Guid Id { get; set; }
 
         [Required]
-        [StringLength(500)]
-        public string Title { get; set; }
-
-        public DateTime? PublicationDate { get; set; }
+        public DateTime CreationDate { get; set; }
 
         [Required]
-        public Guid AuthorId { get; set; }
+        public Guid ProductId { get; set; }
+
+        [Required]
+        public Guid BasketId { get; set; }
     }
 }
