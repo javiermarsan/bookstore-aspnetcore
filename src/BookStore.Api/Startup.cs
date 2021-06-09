@@ -1,6 +1,8 @@
 using AutoMapper;
 using BookStore.Api.Features.Authors.Commands;
 using BookStore.Api.Features.Authors.Queries;
+using BookStore.ApplicationCore.Interfaces;
+using BookStore.ApplicationCore.Services;
 using BookStore.Infrastructure.Data;
 using FluentValidation.AspNetCore;
 using MediatR;
@@ -32,9 +34,10 @@ namespace BookStore.Api
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddControllers().AddFluentValidation(c => c.RegisterValidatorsFromAssemblyContaining<CreateAuthorCommand.CreateCommandValidator>());
+            services.AddScoped(typeof(IRepository<>), typeof(EfRepository<>));
+            services.AddScoped<IBasketService, BasketService>();
 
-            services.AddControllers();
+            services.AddControllers().AddFluentValidation(c => c.RegisterValidatorsFromAssemblyContaining<CreateAuthorCommand.CreateCommandValidator>());
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "BookStore.Api", Version = "v1" });
@@ -46,7 +49,6 @@ namespace BookStore.Api
             });
 
             services.AddMediatR(typeof(CreateAuthorCommand.CreateCommandHandler).Assembly);
-
             services.AddAutoMapper(typeof(GetAuthorListQuery));
         }
 

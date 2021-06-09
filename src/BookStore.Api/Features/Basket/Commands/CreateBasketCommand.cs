@@ -1,4 +1,5 @@
 ﻿using BookStore.ApplicationCore.Entities;
+using BookStore.ApplicationCore.Interfaces;
 using BookStore.Infrastructure.Data;
 using MediatR;
 using System;
@@ -17,10 +18,12 @@ namespace BookStore.Api.Features.Basket.Commands
         public class CreateCommandHandler : IRequestHandler<CreateBasketCommand, Guid>
         {
             private readonly EfContext _context;
+            private readonly IBasketService _basketService;
 
-            public CreateCommandHandler(EfContext context)
+            public CreateCommandHandler(EfContext context, IBasketService basketService)
             {
                 _context = context;
+                _basketService = basketService;
             }
 
             public async Task<Guid> Handle(CreateBasketCommand request, CancellationToken cancellationToken)
@@ -37,20 +40,10 @@ namespace BookStore.Api.Features.Basket.Commands
                     throw new Exception("Failed to save the basket");
 
                 Guid basketId = entity.BasketId;
+                if (request.Items == null || request.Items.Count == 0)
+                    return basketId;
 
-                foreach (Guid productId in request.Items)
-                {
-                    BasketItemEntity item = new BasketItemEntity
-                    {
-                        CreationDate = DateTime.Now,
-                        BasketId = basketId,
-                        ProductId = productId
-                    };
-
-                    _context.BasketItem.Add(item);
-                }
-
-                value = await _context.SaveChangesAsync();
+                value = await _basketService.AddItemsToBasket(basketId, request.Items);
                 if (value > 0)
                     return basketId;
 

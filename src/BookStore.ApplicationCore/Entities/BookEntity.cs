@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 namespace BookStore.ApplicationCore.Entities
 {
     [Table("Book")]
-    public class BookEntity
+    public class BookEntity : BaseEntity
     {
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
