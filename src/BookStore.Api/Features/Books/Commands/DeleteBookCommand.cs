@@ -7,6 +7,7 @@ using FluentValidation;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
 using BookStore.ApplicationCore.Entities;
+using BookStore.ApplicationCore.Interfaces;
 using BookStore.Infrastructure.Data;
 
 namespace BookStore.Api.Features.Books.Commands
@@ -17,22 +18,22 @@ namespace BookStore.Api.Features.Books.Commands
 
         public class DeleteCommandHandler : IRequestHandler<DeleteBookCommand, bool>
         {
-            private readonly EfContext _context;
+            private readonly IRepository<Book> _repository;
 
-            public DeleteCommandHandler(EfContext context)
+            public DeleteCommandHandler(IRepository<Book> repository)
             {
-                _context = context;
+                _repository = repository;
             }
 
             public async Task<bool> Handle(DeleteBookCommand request, CancellationToken cancellationToken)
             {
-                Book entity = await _context.Book.Where(a => a.BookId == request.BookId).FirstOrDefaultAsync();
+                Book entity = await _repository.QueryContext().Where(a => a.BookId == request.BookId).FirstOrDefaultAsync();
                 if (entity == null)
                     return false;
 
-                _context.Book.Remove(entity);
+                _repository.Delete(entity);
 
-                int value = await _context.SaveChangesAsync();
+                int value = await _repository.SaveAsync();
                 if (value > 0)
                     return true;
 

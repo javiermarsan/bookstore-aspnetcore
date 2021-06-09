@@ -1,4 +1,5 @@
 ﻿using BookStore.ApplicationCore.Entities;
+using BookStore.ApplicationCore.Interfaces;
 using BookStore.Infrastructure.Data;
 using FluentValidation;
 using MediatR;
@@ -29,11 +30,11 @@ namespace BookStore.Api.Features.Books.Commands
 
         public class CreateCommandHandler : IRequestHandler<CreateBookCommand, Guid>
         {
-            private readonly EfContext _context;
+            private readonly IRepository<Book> _repository;
 
-            public CreateCommandHandler(EfContext context)
+            public CreateCommandHandler(IRepository<Book> repository)
             {
-                _context = context;
+                _repository = repository;
             }
 
             public async Task<Guid> Handle(CreateBookCommand request, CancellationToken cancellationToken)
@@ -45,9 +46,9 @@ namespace BookStore.Api.Features.Books.Commands
                     AuthorId = request.AuthorId
                 };
 
-                _context.Book.Add(book);
+                _repository.Add(book);
 
-                int value = await _context.SaveChangesAsync();
+                int value = await _repository.SaveAsync();
                 if (value > 0)
                     return book.BookId;
 

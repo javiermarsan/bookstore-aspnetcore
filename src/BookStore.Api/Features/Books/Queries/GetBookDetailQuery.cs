@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using BookStore.ApplicationCore.Entities;
+using BookStore.ApplicationCore.Interfaces;
 using BookStore.Infrastructure.Data;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
@@ -17,18 +18,18 @@ namespace BookStore.Api.Features.Books.Queries
 
         public class GetDetailQueryHandler : IRequestHandler<GetBookDetailQuery, BookDto>
         {
-            private readonly EfContext _context;
+            private readonly IRepository<Book> _repository;
             private readonly IMapper _mapper;
 
-            public GetDetailQueryHandler(EfContext context, IMapper mapper)
+            public GetDetailQueryHandler(IRepository<Book> repository, IMapper mapper)
             {
-                _context = context;
+                _repository = repository;
                 _mapper = mapper;
             }
 
             public async Task<BookDto> Handle(GetBookDetailQuery request, CancellationToken cancellationToken)
             {
-                var entity = await _context.Book.Where(x => x.BookId == request.BookId).FirstOrDefaultAsync();
+                var entity = await _repository.Query().Where(x => x.BookId == request.BookId).FirstOrDefaultAsync();
                 if (entity == null)
                     throw new Exception("Book not found");
 
