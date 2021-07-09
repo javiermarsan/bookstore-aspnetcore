@@ -11,7 +11,7 @@ using System.Threading.Tasks;
 
 namespace BookStore.Api.Features.Books.Commands
 {
-    public class CreateBookCommand : IRequest<Guid>
+    public class AuthenticateCommand : IRequest<Guid>
     {
         public string Title { get; set; }
 
@@ -19,7 +19,7 @@ namespace BookStore.Api.Features.Books.Commands
 
         public Guid AuthorId { get; set; }
 
-        public class CreateCommandValidator : AbstractValidator<CreateBookCommand>
+        public class CreateCommandValidator : AbstractValidator<AuthenticateCommand>
         {
             public CreateCommandValidator()
             {
@@ -28,7 +28,7 @@ namespace BookStore.Api.Features.Books.Commands
             }
         }
 
-        public class CreateCommandHandler : IRequestHandler<CreateBookCommand, Guid>
+        public class CreateCommandHandler : IRequestHandler<AuthenticateCommand, Guid>
         {
             private readonly IRepository<Book> _repository;
 
@@ -37,7 +37,7 @@ namespace BookStore.Api.Features.Books.Commands
                 _repository = repository;
             }
 
-            public async Task<Guid> Handle(CreateBookCommand request, CancellationToken cancellationToken)
+            public async Task<Guid> Handle(AuthenticateCommand request, CancellationToken cancellationToken)
             {
                 Book book = new Book
                 {

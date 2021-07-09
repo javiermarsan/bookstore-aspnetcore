@@ -4,6 +4,7 @@ using BookStore.Api.Features.Authors.Queries;
 using BookStore.ApplicationCore.Interfaces;
 using BookStore.ApplicationCore.Services;
 using BookStore.Infrastructure.Data;
+using BookStore.Infrastructure.Identity.Services;
 using FluentValidation.AspNetCore;
 using MediatR;
 using Microsoft.AspNetCore.Builder;
@@ -19,6 +20,9 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.IdentityModel.Tokens;
+using System.Text;
 
 namespace BookStore.Api
 {
@@ -50,6 +54,37 @@ namespace BookStore.Api
 
             services.AddMediatR(typeof(CreateAuthorCommand.CreateCommandHandler).Assembly);
             services.AddAutoMapper(typeof(GetAuthorListQuery));
+
+            // Token
+            services.AddTransient<ITokenService, TokenService>();
+            services.AddAuthentication(options =>
+            {
+                options.DefaultScheme = "bearer";
+            })
+            .AddJwtBearer("bearer", options =>
+            {
+                options.TokenValidationParameters = new TokenValidationParameters
+                {
+                    ValidateAudience = false,
+                    ValidateIssuer = false,
+                    ValidateIssuerSigningKey = true,
+                    IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(TokenService.ServerSigningPassword)),
+                    ValidateLifetime = true,
+                    ClockSkew = TimeSpan.Zero
+                };
+
+                options.Events = new JwtBearerEvents
+                {
+                    OnAuthenticationFailed = context =>
+                    {
+                        if (context.Exception.GetType() == typeof(SecurityTokenExpiredException))
+                        {
+                            context.Response.Headers.Add("Token-Expired", "true");
+                        }
+                        return Task.CompletedTask;
+                    }
+                };
+            });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -64,6 +99,7 @@ namespace BookStore.Api
 
             app.UseRouting();
 
+            app.UseAuthentication(); // Token
             app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>
