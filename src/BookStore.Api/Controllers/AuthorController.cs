@@ -22,6 +22,7 @@ namespace BookStore.Api.Controllers
         }
 
         [HttpPost]
+        //[HttpPost("Create")]
         public async Task<ActionResult<Guid>> CreateAuthor(CreateAuthorCommand data)
         {
             Guid newId = await _mediator.Send(data);
@@ -29,8 +30,7 @@ namespace BookStore.Api.Controllers
         }
 
         [HttpPut]
-        //[HttpPost]
-        //[Route("update")]
+        //[HttpPost("Update")]
         public async Task<ActionResult> UpdateAuthor(UpdateAuthorCommand data)
         {
             bool found = await _mediator.Send(data);
@@ -41,8 +41,7 @@ namespace BookStore.Api.Controllers
         }
 
         [HttpDelete]
-        //[HttpPost]
-        //[Route("delete")]
+        //[HttpPost("Delete")]
         public async Task<ActionResult> DeleteAuthor(DeleteAuthorCommand data)
         {
             bool found = await _mediator.Send(data);

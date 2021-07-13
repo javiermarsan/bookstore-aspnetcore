@@ -24,7 +24,6 @@ namespace BookStore.Api.Controllers
             _mediator = mediator;
         }
 
-        /*
         // POST: api/Token/Authenticate
         /// <summary>
         ///     Validate that the user account is valid and return an auth token
@@ -37,10 +36,10 @@ namespace BookStore.Api.Controllers
         [ProducesResponseType(Microsoft.AspNetCore.Http.StatusCodes.Status200OK)]
         [ProducesResponseType(Microsoft.AspNetCore.Http.StatusCodes.Status400BadRequest)]
         [ApiConventionMethod(typeof(DefaultApiConventions), nameof(DefaultApiConventions.Post))]
-        public async Task<TokenResponse> AuthenticateAsync([FromBody] Authenticate.AuthenticateCommand command)
+        public async Task<TokenResponse> AuthenticateAsync(Authenticate.AuthenticateCommand command)
         {
             var response = await _mediator.Send(command);
             return response.Resource;
-        }*/
+        }
     }
 }

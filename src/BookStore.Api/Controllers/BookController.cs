@@ -22,7 +22,7 @@ namespace BookStore.Api.Controllers
         }
 
         [HttpPost]
-        public async Task<ActionResult<Guid>> CreateBook(AuthenticateCommand data)
+        public async Task<ActionResult<Guid>> CreateBook(CreateBookCommand data)
         {
             Guid newId = await _mediator.Send(data);
             return newId;
