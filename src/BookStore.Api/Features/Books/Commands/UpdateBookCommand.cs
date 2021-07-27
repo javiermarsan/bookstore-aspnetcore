@@ -6,8 +6,8 @@ using System.Threading.Tasks;
 using FluentValidation;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
-using BookStore.ApplicationCore.Entities;
-using BookStore.ApplicationCore.Interfaces;
+using BookStore.Application.Entities;
+using BookStore.Application.Interfaces;
 using BookStore.Infrastructure.Data;
 
 namespace BookStore.Api.Features.Books.Commands

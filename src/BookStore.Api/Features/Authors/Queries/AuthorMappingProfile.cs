@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using AutoMapper;
-using BookStore.ApplicationCore.Entities;
+using BookStore.Application.Entities;
 
 namespace BookStore.Api.Features.Authors.Queries
 {

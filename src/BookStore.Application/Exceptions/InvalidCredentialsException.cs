@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace BookStore.ApplicationCore.Exceptions
+namespace BookStore.Application.Exceptions
 {
     public class InvalidCredentialsException : Exception
     {

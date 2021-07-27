@@ -1,4 +1,4 @@
-﻿using BookStore.ApplicationCore.Entities;
+﻿using BookStore.Application.Entities;
 using BookStore.Infrastructure.Data;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
@@ -26,7 +26,7 @@ namespace BookStore.Api.Features.Baskets.Queries
             public async Task<BasketDto> Handle(GetBasketDetailQuery request, CancellationToken cancellationToken)
             {
                 List<BasketItemDto> listDto = new List<BasketItemDto>();
-                ApplicationCore.Entities.Basket entity = await _context.Basket.FirstOrDefaultAsync(x => x.BasketId == request.BasketId);
+                Basket entity = await _context.Basket.FirstOrDefaultAsync(x => x.BasketId == request.BasketId);
                 List<BasketItem> entityItems = await _context.BasketItem.Where(x => x.BasketId == request.BasketId).ToListAsync();
 
                 foreach (BasketItem item in entityItems)

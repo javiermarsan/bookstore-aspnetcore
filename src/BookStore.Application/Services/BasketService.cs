@@ -1,12 +1,12 @@
-﻿using BookStore.ApplicationCore.Entities;
-using BookStore.ApplicationCore.Interfaces;
+﻿using BookStore.Application.Entities;
+using BookStore.Application.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace BookStore.ApplicationCore.Services
+namespace BookStore.Application.Services
 {
     public class BasketService : IBasketService
     {

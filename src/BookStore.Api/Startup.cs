@@ -1,8 +1,8 @@
 using AutoMapper;
 using BookStore.Api.Features.Authors.Commands;
 using BookStore.Api.Features.Authors.Queries;
-using BookStore.ApplicationCore.Interfaces;
-using BookStore.ApplicationCore.Services;
+using BookStore.Application.Interfaces;
+using BookStore.Application.Services;
 using BookStore.Infrastructure.Data;
 using BookStore.Infrastructure.Identity.Services;
 using FluentValidation.AspNetCore;

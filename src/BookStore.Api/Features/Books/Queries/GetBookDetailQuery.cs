@@ -1,6 +1,6 @@
 ﻿using AutoMapper;
-using BookStore.ApplicationCore.Entities;
-using BookStore.ApplicationCore.Interfaces;
+using BookStore.Application.Entities;
+using BookStore.Application.Interfaces;
 using BookStore.Infrastructure.Data;
 using MediatR;
 using Microsoft.EntityFrameworkCore;

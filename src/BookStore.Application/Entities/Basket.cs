@@ -5,7 +5,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace BookStore.ApplicationCore.Entities
+namespace BookStore.Application.Entities
 {
     public class Basket : BaseEntity
     {

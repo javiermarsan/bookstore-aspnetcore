@@ -1,7 +1,7 @@
 ﻿using AutoMapper;
-using BookStore.ApplicationCore.Entities;
-using BookStore.ApplicationCore.Exceptions;
-using BookStore.ApplicationCore.Interfaces;
+using BookStore.Application.Entities;
+using BookStore.Application.Exceptions;
+using BookStore.Application.Interfaces;
 using BookStore.Infrastructure.Data;
 using BookStore.Infrastructure.Identity.Models;
 using BookStore.Infrastructure.Identity.Services;

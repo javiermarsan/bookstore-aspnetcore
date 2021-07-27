@@ -5,10 +5,10 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
-using BookStore.ApplicationCore.Entities;
+using BookStore.Application.Entities;
 using BookStore.Infrastructure.Data;
 using Microsoft.EntityFrameworkCore;
-using BookStore.ApplicationCore.Interfaces;
+using BookStore.Application.Interfaces;
 
 namespace BookStore.Api.Features.Authors.Queries
 {

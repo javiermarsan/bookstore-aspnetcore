@@ -5,16 +5,21 @@ using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace BookStore.ApplicationCore.Entities
+namespace BookStore.Application.Entities
 {
-    public class Author : BaseEntity
+    public class BasketItem : BaseEntity
     {
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-        public Guid AuthorId { get; set; }
+        public Guid Id { get; set; }
 
         [Required]
-        [StringLength(250)]
-        public string Name { get; set; }
+        public DateTime CreationDate { get; set; }
+
+        [Required]
+        public Guid ProductId { get; set; }
+
+        [Required]
+        public Guid BasketId { get; set; }
     }
 }

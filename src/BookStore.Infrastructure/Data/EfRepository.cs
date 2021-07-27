@@ -3,8 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Threading.Tasks;
-using BookStore.ApplicationCore.Entities;
-using BookStore.ApplicationCore.Interfaces;
+using BookStore.Application.Entities;
+using BookStore.Application.Interfaces;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.ChangeTracking;
 

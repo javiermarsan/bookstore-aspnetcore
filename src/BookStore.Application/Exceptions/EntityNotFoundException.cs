@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace BookStore.ApplicationCore.Exceptions
+namespace BookStore.Application.Exceptions
 {
     public class EntityNotFoundException : Exception
     {

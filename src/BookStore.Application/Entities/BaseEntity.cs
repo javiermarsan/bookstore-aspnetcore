@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Linq;
 
-namespace BookStore.ApplicationCore.Entities
+namespace BookStore.Application.Entities
 {
     public abstract class BaseEntity
     {
