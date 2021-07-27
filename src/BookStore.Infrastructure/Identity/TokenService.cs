@@ -1,5 +1,5 @@
-﻿using BookStore.Application.Features.Token.Models;
-using BookStore.Application.Services;
+﻿using BookStore.Application.Token.Models;
+using BookStore.Application.Baskets.Services;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
@@ -10,6 +10,7 @@ using System.Linq;
 using System.Security.Claims;
 using System.Text;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Http;
 
 namespace BookStore.Infrastructure.Identity
 {
@@ -20,19 +21,24 @@ namespace BookStore.Infrastructure.Identity
 
         private readonly Token _token;
         private readonly IConfiguration _configuration;
+        private readonly HttpContext _httpContext;
 
         /// <inheritdoc cref="ITokenService" />
         public TokenService(
             IOptions<Token> tokenOptions,
-            IConfiguration configuration)
+            IConfiguration configuration,
+            IHttpContextAccessor httpContextAccessor)
         {
             _token = tokenOptions.Value;
             _configuration = configuration;
+            _httpContext = (httpContextAccessor != null) ? httpContextAccessor.HttpContext : throw new ArgumentNullException(nameof(httpContextAccessor));
         }
 
         /// <inheritdoc cref="ITokenService.Authenticate(TokenRequest, string)"/>
-        public async Task<TokenResponse> Authenticate(TokenRequest request, string ipAddress)
+        public async Task<TokenResponse> Authenticate(TokenRequest request)
         {
+            //string ipAddress = _httpContext.Connection.RemoteIpAddress.MapToIPv4().ToString();
+
             if (await IsValidUser(request.Username, request.Password))
             {
                 ApplicationUser user = await GetUserByEmail(request.Username);

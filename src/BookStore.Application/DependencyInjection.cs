@@ -1,7 +1,7 @@
 ﻿using System.Reflection;
 using AutoMapper;
-using BookStore.Application.Interfaces;
-using BookStore.Application.Services;
+using BookStore.Application.Common.Interfaces;
+using BookStore.Application.Baskets.Services;
 using MediatR;
 using Microsoft.Extensions.DependencyInjection;
 

@@ -6,8 +6,8 @@ using System.Linq;
 using System.Threading.Tasks;
 using MediatR;
 using Microsoft.AspNetCore.Authorization;
-using BookStore.Application.Features.Token;
-using BookStore.Application.Features.Token.Models;
+using BookStore.Application.Token;
+using BookStore.Application.Token.Models;
 
 namespace BookStore.Api.Controllers
 {

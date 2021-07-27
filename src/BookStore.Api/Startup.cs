@@ -1,9 +1,6 @@
 using AutoMapper;
-using BookStore.Application.Features.Authors.Commands;
-using BookStore.Application.Features.Authors.Queries;
-using BookStore.Application.Interfaces;
-using BookStore.Application.Services;
-using BookStore.Infrastructure.Data;
+using BookStore.Application.Authors.Commands;
+using BookStore.Application.Baskets.Services;
 using FluentValidation.AspNetCore;
 using MediatR;
 using Microsoft.AspNetCore.Builder;
@@ -45,7 +42,10 @@ namespace BookStore.Api
             services.AddInfrastructure(Configuration, Environment);
             services.AddApplication();
 
-            services.AddControllers().AddFluentValidation(c => c.RegisterValidatorsFromAssemblyContaining<IEfContext>());
+            services.AddControllers().AddFluentValidation(c => 
+                c.RegisterValidatorsFromAssemblyContaining<CreateAuthorCommand.CreateCommandValidator>()
+            );
+
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "BookStore.Api", Version = "v1" });

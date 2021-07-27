@@ -1,4 +1,4 @@
-﻿using BookStore.Application.Interfaces;
+﻿using BookStore.Application.Common.Interfaces;
 using BookStore.Infrastructure.Data;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.EntityFrameworkCore;
