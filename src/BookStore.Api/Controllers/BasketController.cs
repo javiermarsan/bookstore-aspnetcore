@@ -5,8 +5,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using MediatR;
-using BookStore.Api.Features.Baskets.Commands;
-using BookStore.Api.Features.Baskets.Queries;
+using BookStore.Application.Features.Baskets.Commands;
+using BookStore.Application.Features.Baskets.Queries;
 
 namespace BookStore.Api.Controllers
 {

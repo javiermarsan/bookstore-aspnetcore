@@ -1,10 +1,9 @@
 using AutoMapper;
-using BookStore.Api.Features.Authors.Commands;
-using BookStore.Api.Features.Authors.Queries;
+using BookStore.Application.Features.Authors.Commands;
+using BookStore.Application.Features.Authors.Queries;
 using BookStore.Application.Interfaces;
 using BookStore.Application.Services;
 using BookStore.Infrastructure.Data;
-using BookStore.Infrastructure.Identity.Services;
 using FluentValidation.AspNetCore;
 using MediatR;
 using Microsoft.AspNetCore.Builder;
@@ -23,37 +22,34 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
 using System.Text;
+using BookStore.Application;
+using BookStore.Infrastructure;
+using BookStore.Infrastructure.Identity;
 
 namespace BookStore.Api
 {
     public class Startup
     {
-        public Startup(IConfiguration configuration)
+        public Startup(IConfiguration configuration, IWebHostEnvironment environment)
         {
             Configuration = configuration;
+            Environment = environment;
         }
 
         public IConfiguration Configuration { get; }
+        public IWebHostEnvironment Environment { get; }
 
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddScoped(typeof(IRepository<>), typeof(EfRepository<>));
-            services.AddScoped<IBasketService, BasketService>();
+            services.AddInfrastructure(Configuration, Environment);
+            services.AddApplication();
 
-            services.AddControllers().AddFluentValidation(c => c.RegisterValidatorsFromAssemblyContaining<CreateAuthorCommand.CreateCommandValidator>());
+            services.AddControllers().AddFluentValidation(c => c.RegisterValidatorsFromAssemblyContaining<IEfContext>());
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "BookStore.Api", Version = "v1" });
             });
-
-            services.AddDbContext<EfContext>(opt =>
-            {
-                opt.UseSqlServer(Configuration.GetConnectionString("DbConnection"));
-            });
-
-            services.AddMediatR(typeof(CreateAuthorCommand.CreateCommandHandler).Assembly);
-            services.AddAutoMapper(typeof(GetAuthorListQuery));
 
             // Token
             services.AddTransient<ITokenService, TokenService>();

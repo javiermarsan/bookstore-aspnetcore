@@ -5,11 +5,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using MediatR;
-using BookStore.Api.Features.Books.Commands;
-using BookStore.Api.Features.Books.Queries;
 using Microsoft.AspNetCore.Authorization;
-using BookStore.Api.Features.Token;
-using BookStore.Infrastructure.Identity.Models;
+using BookStore.Application.Features.Token;
+using BookStore.Application.Features.Token.Models;
 
 namespace BookStore.Api.Controllers
 {
