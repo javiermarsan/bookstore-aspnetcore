@@ -5,11 +5,13 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using BookStore.Application.Baskets.Commands;
 using BookStore.Application.Baskets.Queries;
 
 namespace BookStore.Api.Controllers
 {
+    [Authorize]
     [ApiController]
     [Route("api/[controller]")]
     public class BasketController : ControllerBase

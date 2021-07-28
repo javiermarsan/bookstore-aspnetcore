@@ -7,9 +7,11 @@ using System.Threading.Tasks;
 using MediatR;
 using BookStore.Application.Authors.Commands;
 using BookStore.Application.Authors.Queries;
+using Microsoft.AspNetCore.Authorization;
 
 namespace BookStore.Api.Controllers
 {
+    [Authorize]
     [ApiController]
     [Route("api/[controller]")]
     public class AuthorController : ControllerBase
