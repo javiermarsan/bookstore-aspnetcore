@@ -17,6 +17,7 @@ using System.Text;
 using BookStore.Application;
 using BookStore.Infrastructure;
 using BookStore.Infrastructure.Identity;
+using BookStore.Api.Common;
 
 namespace BookStore.Api
 {
@@ -112,6 +113,8 @@ namespace BookStore.Api
                 app.UseSwagger();
                 app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "BookStore.Api v1"));
             }
+
+            app.UseCustomMiddleware();
 
             app.UseRouting();
 

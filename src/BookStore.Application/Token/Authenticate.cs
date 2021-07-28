@@ -1,17 +1,14 @@
 ﻿using AutoMapper;
-using BookStore.Domain.Entities;
-using BookStore.Domain.Exceptions;
 using BookStore.Application.Token.Models;
-using BookStore.Application.Common.Interfaces;
 using BookStore.Application.Baskets.Services;
 using FluentValidation;
 using MediatR;
-using Microsoft.AspNetCore.Http;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
+using BookStore.Application.Common.Exceptions;
 
 namespace BookStore.Application.Token
 {
