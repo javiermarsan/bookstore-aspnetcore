@@ -18,5 +18,11 @@ namespace BookStore.Infrastructure.Data
         public DbSet<Book> Book { get; set; }
         public DbSet<Basket> Basket { get; set; }
         public DbSet<BasketItem> BasketItem { get; set; }
+
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            // The domain is independent of data access concerns
+            modelBuilder.ApplyConfigurationsFromAssembly(typeof(EfContext).Assembly);
+        }
     }
 }

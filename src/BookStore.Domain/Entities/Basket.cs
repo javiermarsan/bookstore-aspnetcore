@@ -10,11 +10,8 @@ namespace BookStore.Domain.Entities
 {
     public class Basket : BaseEntity
     {
-        [Key]
-        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public Guid BasketId { get; set; }
 
-        [Required]
         public DateTime CreationDate { get; set; }
     }
 }

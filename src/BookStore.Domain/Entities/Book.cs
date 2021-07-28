@@ -10,17 +10,12 @@ namespace BookStore.Domain.Entities
 {
     public class Book : BaseEntity
     {
-        [Key]
-        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public Guid BookId { get; set; }
 
-        [Required]
-        [StringLength(500)]
         public string Title { get; set; }
 
-        public DateTime? PublicationDate { get; set; }
-
-        [Required]
         public Guid AuthorId { get; set; }
+
+        public DateTime? PublicationDate { get; set; }
     }
 }

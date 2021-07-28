@@ -10,12 +10,8 @@ namespace BookStore.Domain.Entities
 {
     public class Author : BaseEntity
     {
-        [Key]
-        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public Guid AuthorId { get; set; }
 
-        [Required]
-        [StringLength(250)]
         public string Name { get; set; }
     }
 }
