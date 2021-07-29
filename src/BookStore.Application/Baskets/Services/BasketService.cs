@@ -10,9 +10,9 @@ namespace BookStore.Application.Baskets.Services
 {
     public class BasketService : IBasketService
     {
-        private readonly IRepository<BasketItem> _basketItemRepository;
+        private readonly ICatalogRepository<BasketItem> _basketItemRepository;
 
-        public BasketService(IRepository<BasketItem> basketItemRepository)
+        public BasketService(ICatalogRepository<BasketItem> basketItemRepository)
         {
             _basketItemRepository = basketItemRepository;
         }

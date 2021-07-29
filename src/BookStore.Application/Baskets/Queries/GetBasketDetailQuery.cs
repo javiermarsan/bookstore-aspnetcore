@@ -17,9 +17,9 @@ namespace BookStore.Application.Baskets.Queries
         public class GetDetailQueryHandler : IRequestHandler<GetBasketDetailQuery, BasketDto>
         {
             private readonly IBasketRepository _basketRepository;
-            private readonly IRepository<Book> _bookRepository;
+            private readonly ICatalogRepository<Book> _bookRepository;
 
-            public GetDetailQueryHandler(IBasketRepository basketRepository, IRepository<Book> bookRepository)
+            public GetDetailQueryHandler(IBasketRepository basketRepository, ICatalogRepository<Book> bookRepository)
             {
                 _basketRepository = basketRepository;
                 _bookRepository = bookRepository;

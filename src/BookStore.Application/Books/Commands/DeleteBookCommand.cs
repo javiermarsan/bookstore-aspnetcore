@@ -17,9 +17,9 @@ namespace BookStore.Application.Books.Commands
 
         public class DeleteCommandHandler : IRequestHandler<DeleteBookCommand, bool>
         {
-            private readonly IRepository<Book> _repository;
+            private readonly ICatalogRepository<Book> _repository;
 
-            public DeleteCommandHandler(IRepository<Book> repository)
+            public DeleteCommandHandler(ICatalogRepository<Book> repository)
             {
                 _repository = repository;
             }

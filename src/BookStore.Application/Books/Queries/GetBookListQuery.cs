@@ -15,10 +15,10 @@ namespace BookStore.Application.Books.Queries
     {
         public class GetListQueryHandler : IRequestHandler<GetBookListQuery, List<BookDto>>
         {
-            private readonly IRepository<Book> _repository;
+            private readonly ICatalogRepository<Book> _repository;
             private readonly IMapper _mapper;
 
-            public GetListQueryHandler(IRepository<Book> repository, IMapper mapper)
+            public GetListQueryHandler(ICatalogRepository<Book> repository, IMapper mapper)
             {
                 _repository = repository;
                 _mapper = mapper;

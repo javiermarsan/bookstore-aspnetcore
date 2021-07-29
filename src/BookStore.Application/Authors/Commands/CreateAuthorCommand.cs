@@ -25,9 +25,9 @@ namespace BookStore.Application.Authors.Commands
 
         public class CreateCommandHandler : IRequestHandler<CreateAuthorCommand, Guid>
         {
-            private readonly IRepository<Author> _repository;
+            private readonly ICatalogRepository<Author> _repository;
 
-            public CreateCommandHandler(IRepository<Author> repository)
+            public CreateCommandHandler(ICatalogRepository<Author> repository)
             {
                 _repository = repository;
             }

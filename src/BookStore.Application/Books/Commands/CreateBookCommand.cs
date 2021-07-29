@@ -29,9 +29,9 @@ namespace BookStore.Application.Books.Commands
 
         public class CreateCommandHandler : IRequestHandler<CreateBookCommand, Guid>
         {
-            private readonly IRepository<Book> _repository;
+            private readonly ICatalogRepository<Book> _repository;
 
-            public CreateCommandHandler(IRepository<Book> repository)
+            public CreateCommandHandler(ICatalogRepository<Book> repository)
             {
                 _repository = repository;
             }

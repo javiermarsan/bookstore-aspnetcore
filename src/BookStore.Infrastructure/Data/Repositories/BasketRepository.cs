@@ -9,15 +9,15 @@ using System.Threading.Tasks;
 
 namespace BookStore.Infrastructure.Data.Repositories
 {
-    public class BasketRepository : EfRepository<Basket>, IBasketRepository
+    public class BasketRepository : CatalogRepository<Basket>, IBasketRepository
     {
-        public BasketRepository(EfContext dbContext) : base(dbContext)
+        public BasketRepository(CatalogContext dbContext) : base(dbContext)
         {
         }
 
         public Task<Basket> GetByIdWithItemsAsync(Guid id)
         {
-            return DbContext.Basket
+            return Db.Basket
                 .Include(o => o.Items)
                 .FirstOrDefaultAsync(x => x.BasketId == id);
         }

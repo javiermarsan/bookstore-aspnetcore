@@ -33,9 +33,9 @@ namespace BookStore.Application.Books.Commands
 
         public class UpdateCommandHandler : IRequestHandler<UpdateBookCommand, bool>
         {
-            private readonly IRepository<Book> _repository;
+            private readonly ICatalogRepository<Book> _repository;
 
-            public UpdateCommandHandler(IRepository<Book> repository)
+            public UpdateCommandHandler(ICatalogRepository<Book> repository)
             {
                 _repository = repository;
             }

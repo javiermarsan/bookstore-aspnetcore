@@ -11,12 +11,12 @@ using BookStore.Domain.Common;
 
 namespace BookStore.Infrastructure.Data
 {
-    public class EfRepository<TEntity> : IRepository<TEntity> where TEntity : BaseEntity
+    public abstract class Repository<TEntity> : IRepository<TEntity> where TEntity : BaseEntity
     {
-        protected EfContext DbContext { get; private set; }
+        protected DbContext DbContext { get; private set; }
         protected DbSet<TEntity> DbSet { get; private set; }
 
-        public EfRepository(EfContext context)
+        public Repository(DbContext context)
         {
             DbContext = context;
             DbSet = DbContext.Set<TEntity>();

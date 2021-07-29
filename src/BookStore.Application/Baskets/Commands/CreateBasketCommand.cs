@@ -16,10 +16,10 @@ namespace BookStore.Application.Baskets.Commands
 
         public class CreateCommandHandler : IRequestHandler<CreateBasketCommand, Guid>
         {
-            private readonly IRepository<Basket> _repository;
+            private readonly ICatalogRepository<Basket> _repository;
             private readonly IBasketService _basketService;
 
-            public CreateCommandHandler(IRepository<Basket> repository, IBasketService basketService)
+            public CreateCommandHandler(ICatalogRepository<Basket> repository, IBasketService basketService)
             {
                 _repository = repository;
                 _basketService = basketService;

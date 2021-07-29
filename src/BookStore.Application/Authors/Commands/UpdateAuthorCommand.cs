@@ -28,9 +28,9 @@ namespace BookStore.Application.Authors.Commands
 
         public class UpdateCommandHandler : IRequestHandler<UpdateAuthorCommand, bool>
         {
-            private readonly IRepository<Author> _repository;
+            private readonly ICatalogRepository<Author> _repository;
 
-            public UpdateCommandHandler(IRepository<Author> repository)
+            public UpdateCommandHandler(ICatalogRepository<Author> repository)
             {
                 _repository = repository;
             }

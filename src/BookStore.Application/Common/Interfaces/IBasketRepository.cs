@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace BookStore.Application.Common.Interfaces
 {
-    public interface IBasketRepository : IRepository<Basket>
+    public interface IBasketRepository : ICatalogRepository<Basket>
     {
         Task<Basket> GetByIdWithItemsAsync(Guid id);
     }

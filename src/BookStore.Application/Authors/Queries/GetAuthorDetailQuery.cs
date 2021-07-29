@@ -17,10 +17,10 @@ namespace BookStore.Application.Authors.Queries
 
         public class GetDetailQueryHandler : IRequestHandler<GetAuthorDetailQuery, AuthorDto>
         {
-            private readonly IRepository<Author> _repository;
+            private readonly ICatalogRepository<Author> _repository;
             private readonly IMapper _mapper;
 
-            public GetDetailQueryHandler(IRepository<Author> repository, IMapper mapper)
+            public GetDetailQueryHandler(ICatalogRepository<Author> repository, IMapper mapper)
             {
                 _repository = repository;
                 _mapper = mapper;

@@ -8,11 +8,11 @@ using Microsoft.EntityFrameworkCore;
 
 namespace BookStore.Infrastructure.Data
 {
-    public class EfContext : DbContext
+    public class CatalogContext : DbContext
     {
-        public EfContext() { }
+        public CatalogContext() { }
 
-        public EfContext(DbContextOptions<EfContext> options) : base(options) { }
+        public CatalogContext(DbContextOptions<CatalogContext> options) : base(options) { }
 
         public DbSet<Author> Author { get; set; }
         public DbSet<Book> Book { get; set; }
@@ -22,7 +22,7 @@ namespace BookStore.Infrastructure.Data
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             // The domain is independent of data access concerns
-            modelBuilder.ApplyConfigurationsFromAssembly(typeof(EfContext).Assembly);
+            modelBuilder.ApplyConfigurationsFromAssembly(typeof(CatalogContext).Assembly);
         }
     }
 }

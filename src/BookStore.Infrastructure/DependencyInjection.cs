@@ -12,12 +12,12 @@ namespace BookStore.Infrastructure
     {
         public static IServiceCollection AddInfrastructure(this IServiceCollection services, IConfiguration configuration, IWebHostEnvironment environment)
         {
-            services.AddDbContext<EfContext>(opt =>
+            services.AddDbContext<CatalogContext>(opt =>
             {
                 opt.UseSqlServer(configuration.GetConnectionString("DbConnection"));
             });
 
-            services.AddScoped(typeof(IRepository<>), typeof(EfRepository<>));
+            services.AddScoped(typeof(ICatalogRepository<>), typeof(CatalogRepository<>));
             services.AddScoped<IBasketRepository, BasketRepository>();
 
             return services;
