@@ -16,12 +16,12 @@ namespace BookStore.Application.Baskets.Commands
 
         public class CreateCommandHandler : IRequestHandler<CreateBasketCommand, Guid>
         {
-            private readonly IEfContext _context;
+            private readonly IRepository<Basket> _repository;
             private readonly IBasketService _basketService;
 
-            public CreateCommandHandler(IEfContext context, IBasketService basketService)
+            public CreateCommandHandler(IRepository<Basket> repository, IBasketService basketService)
             {
-                _context = context;
+                _repository = repository;
                 _basketService = basketService;
             }
 
@@ -32,9 +32,9 @@ namespace BookStore.Application.Baskets.Commands
                     CreationDate = request.CreationDate
                 };
 
-                _context.Basket.Add(entity);
+                _repository.Add(entity);
 
-                int value = await _context.SaveChangesAsync();
+                int value = await _repository.SaveAsync();
                 if (value == 0)
                     throw new Exception("Failed to save the basket");
 

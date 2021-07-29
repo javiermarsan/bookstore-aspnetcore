@@ -1,5 +1,6 @@
 ﻿using BookStore.Application.Common.Interfaces;
 using BookStore.Infrastructure.Data;
+using BookStore.Infrastructure.Data.Repositories;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
@@ -16,8 +17,8 @@ namespace BookStore.Infrastructure
                 opt.UseSqlServer(configuration.GetConnectionString("DbConnection"));
             });
 
-            services.AddScoped<IEfContext>(provider => provider.GetService<EfContext>());
             services.AddScoped(typeof(IRepository<>), typeof(EfRepository<>));
+            services.AddScoped<IBasketRepository, BasketRepository>();
 
             return services;
         }

@@ -16,22 +16,23 @@ namespace BookStore.Application.Baskets.Queries
 
         public class GetDetailQueryHandler : IRequestHandler<GetBasketDetailQuery, BasketDto>
         {
-            private readonly IEfContext _context;
+            private readonly IBasketRepository _basketRepository;
+            private readonly IRepository<Book> _bookRepository;
 
-            public GetDetailQueryHandler(IEfContext context)
+            public GetDetailQueryHandler(IBasketRepository basketRepository, IRepository<Book> bookRepository)
             {
-                _context = context;
+                _basketRepository = basketRepository;
+                _bookRepository = bookRepository;
             }
 
             public async Task<BasketDto> Handle(GetBasketDetailQuery request, CancellationToken cancellationToken)
             {
                 List<BasketItemDto> listDto = new List<BasketItemDto>();
-                Basket entity = await _context.Basket.FirstOrDefaultAsync(x => x.BasketId == request.BasketId);
-                List<BasketItem> entityItems = await _context.BasketItem.Where(x => x.BasketId == request.BasketId).ToListAsync();
+                Basket entity = await _basketRepository.GetByIdWithItemsAsync(request.BasketId.Value);
 
-                foreach (BasketItem item in entityItems)
+                foreach (BasketItem item in entity.Items)
                 {
-                    Book book = await _context.Book.Where(x => x.BookId == item.ProductId).FirstOrDefaultAsync();
+                    Book book = await _bookRepository.Query().Where(x => x.BookId == item.ProductId).FirstOrDefaultAsync();
                     if (book != null)
                     {
                         BasketItemDto itemDto = new BasketItemDto

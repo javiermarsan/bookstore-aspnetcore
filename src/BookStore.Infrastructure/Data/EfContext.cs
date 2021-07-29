@@ -8,7 +8,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace BookStore.Infrastructure.Data
 {
-    public class EfContext : DbContext, IEfContext
+    public class EfContext : DbContext
     {
         public EfContext() { }
 
