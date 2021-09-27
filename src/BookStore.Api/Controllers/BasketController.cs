@@ -23,7 +23,8 @@ namespace BookStore.Api.Controllers
             _mediator = mediator;
         }
 
-        [HttpPost]
+        //[HttpPost]
+        [HttpPost("Create")]
         public async Task<ActionResult<Guid>> CreateBasket(CreateBasketCommand data)
         {
             Guid newId = await _mediator.Send(data);
