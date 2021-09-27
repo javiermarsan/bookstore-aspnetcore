@@ -42,6 +42,20 @@ namespace BookStore.Api
                 c.RegisterValidatorsFromAssemblyContaining<CreateAuthorCommand.CreateCommandValidator>()
             );
 
+            services.AddCors(options =>
+            {
+                options.AddPolicy("CorsPolicy",
+                    builder => builder
+                        // required if AllowCredentials is set also
+                        .SetIsOriginAllowed(s => true)
+                        //.AllowAnyOrigin()
+                        .AllowAnyMethod()  // doesn't work for DELETE!
+                        .WithMethods("DELETE")
+                        .AllowAnyHeader()
+                        .AllowCredentials()
+                );
+            });
+
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo 
@@ -117,6 +131,7 @@ namespace BookStore.Api
             app.UseCustomMiddleware();
 
             app.UseRouting();
+            app.UseCors("CorsPolicy");
 
             app.UseAuthentication(); // Token
             app.UseAuthorization();
