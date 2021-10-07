@@ -23,7 +23,6 @@ namespace BookStore.Api.Controllers
             _mediator = mediator;
         }
 
-        //[HttpPost]
         [HttpPost("Create")]
         public async Task<ActionResult<Guid>> CreateBook(CreateBookCommand data)
         {
@@ -31,7 +30,6 @@ namespace BookStore.Api.Controllers
             return newId;
         }
 
-        //[HttpPut]
         [HttpPost("Update")]
         public async Task<ActionResult> UpdateBook(UpdateBookCommand data)
         {
@@ -42,7 +40,6 @@ namespace BookStore.Api.Controllers
             return NoContent();
         }
 
-        //[HttpDelete]
         [HttpPost("Delete")]
         public async Task<ActionResult> DeleteBook(DeleteBookCommand data)
         {
